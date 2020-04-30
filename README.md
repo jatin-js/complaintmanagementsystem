@@ -2,7 +2,7 @@
 
 Credential for admin panel :
 
-Username: admin 
+Username: admin <br>
 Password: root
 
 Credential for user panel :
