@@ -7,5 +7,5 @@ Password: root
 
 Credential for user panel :
 
-Username: jatinhmu@gmail.com
+Username: jatinhmu@gmail.com<br>
 Password: root
