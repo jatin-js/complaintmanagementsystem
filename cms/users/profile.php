@@ -13,10 +13,10 @@ if (strlen($_SESSION['login']) == 0) {
     $fname = $_POST['fullname'];
     $contactno = $_POST['contactno'];
     $address = $_POST['address'];
-    $state = $_POST['state'];
+    $year = $_POST['year'];
     $country = $_POST['country'];
     $pincode = $_POST['pincode'];
-    $query = mysqli_query($con, "update users set fullName='$fname',contactNo='$contactno',address='$address',State='$state',country='$country',pincode='$pincode' where userEmail='" . $_SESSION['login'] . "'");
+    $query = mysqli_query($con, "update users set fullName='$fname',contactNo='$contactno',address='$address',year='$year',country='$country',pincode='$pincode' where userEmail='" . $_SESSION['login'] . "'");
     if ($query) {
       $successmsg = "Profile Successfully !!";
     } else {
@@ -67,12 +67,10 @@ if (strlen($_SESSION['login']) == 0) {
                   <div class="alert alert-success alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <b>Well done!</b> <?php echo htmlentities($successmsg); ?></div>
-                <?php } ?>
-
-                <?php if ($errormsg) { ?>
+                <?php } else if ($errormsg) { ?>
                   <div class="alert alert-danger alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <b>Oh snap!</b> </b> <?php echo htmlentities($errormsg); ?></div>
+                    <b>Oh snap!</b> <?php echo htmlentities($errormsg); ?></div>
                 <?php } ?>
                 <?php $query = mysqli_query($con, "select * from users where userEmail='" . $_SESSION['login'] . "'");
                 while ($row = mysqli_fetch_array($query)) {
@@ -106,17 +104,17 @@ if (strlen($_SESSION['login']) == 0) {
                     </div>
 
                     <div class="form-group">
-                      <label class="col-sm-2 col-sm-2 control-label">State</label>
+                      <label class="col-sm-2 col-sm-2 control-label">year</label>
                       <div class="col-sm-4">
-                        <select name="state" required="required" class="form-control">
-                          <option value="<?php echo htmlentities($row['State']); ?>"><?php echo htmlentities($st = $row['State']); ?></option>
-                          <?php $sql = mysqli_query($con, "select stateName from state ");
+                        <select name="year" required="required" class="form-control">
+                          <option value="<?php echo htmlentities($row['year']); ?>"><?php echo htmlentities($st = $row['year']); ?></option>
+                          <?php $sql = mysqli_query($con, "select yearName from year ");
                           while ($rw = mysqli_fetch_array($sql)) {
-                            if ($rw['stateName'] == $st) {
+                            if ($rw['yearName'] == $st) {
                               continue;
                             } else {
                           ?>
-                              <option value="<?php echo htmlentities($rw['stateName']); ?>"><?php echo htmlentities($rw['stateName']); ?></option>
+                              <option value="<?php echo htmlentities($rw['yearName']); ?>"><?php echo htmlentities($rw['yearName']); ?></option>
                           <?php
                             }
                           }
@@ -143,30 +141,6 @@ if (strlen($_SESSION['login']) == 0) {
                     </div>
 
 
-                    <div class="form-group">
-                      <label class="col-sm-2 col-sm-2 control-label">User Photo</label>
-                      <div class="col-sm-4">
-                        <?php $userphoto = $row['userImage'];
-                        if ($userphoto == "") :
-                        ?>
-                          <img src="userimages/noimage.png" width="256" height="256">
-                          <a href="update-image.php">Change Photo</a>
-                        <?php else : ?>
-                          <img src="userimages/<?php echo htmlentities($userphoto); ?>" width="256" height="256">
-                          <a href="update-image.php">Change Photo</a>
-                        <?php endif; ?>
-                      </div>
-
-                    </div>
-
-
-
-
-
-
-
-
-
                   <?php } ?>
 
                   <div class="form-group">
@@ -187,7 +161,6 @@ if (strlen($_SESSION['login']) == 0) {
       <?php include("includes/footer.php"); ?>
     </section>
 
-    <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>

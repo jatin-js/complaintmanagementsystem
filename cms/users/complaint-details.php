@@ -53,10 +53,7 @@ if (strlen($_SESSION['login']) == 0) {
               <div class="col-sm-4">
                 <p><?php echo htmlentities($row['catname']); ?></p>
               </div>
-              <label class="col-sm-2 col-sm-2 control-label"><b>Sub Category :</b> </label>
-              <div class="col-sm-4">
-                <p><?php echo htmlentities($row['subcategory']); ?></p>
-              </div>
+
             </div>
 
 
@@ -66,9 +63,9 @@ if (strlen($_SESSION['login']) == 0) {
               <div class="col-sm-4">
                 <p><?php echo htmlentities($row['complaintType']); ?></p>
               </div>
-              <label class="col-sm-2 col-sm-2 control-label"><b>State :</b></label>
+              <label class="col-sm-2 col-sm-2 control-label"><b>year :</b></label>
               <div class="col-sm-4">
-                <p><?php echo htmlentities($row['state']); ?></p>
+                <p><?php echo htmlentities($row['year']); ?></p>
               </div>
             </div>
 
@@ -79,17 +76,7 @@ if (strlen($_SESSION['login']) == 0) {
               <div class="col-sm-4">
                 <p><?php echo htmlentities($row['noc']); ?></p>
               </div>
-              <label class="col-sm-2 col-sm-2 control-label"><b>File :</b></label>
-              <div class="col-sm-4">
-                <p><?php $cfile = $row['complaintFile'];
-                    if ($cfile == "" || $cfile == "NULL") {
-                      echo htmlentities("File NA");
-                    } else { ?>
-                    <a href="complaintdocs/<?php echo htmlentities($row['complaintFile']); ?>" target='_blank'> View File</a>
-                  <?php } ?>
 
-                </p>
-              </div>
             </div>
             <div class="row mt">
               <label class="col-sm-2 col-sm-2 control-label"><b>Complaint Details </label>

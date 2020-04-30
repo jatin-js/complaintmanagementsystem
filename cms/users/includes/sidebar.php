@@ -6,17 +6,7 @@
             <?php $query = mysqli_query($con, "select fullName,userImage from users where userEmail='" . $_SESSION['login'] . "'");
             while ($row = mysqli_fetch_array($query)) {
             ?>
-                <p class="centered"><a href="profile.php">
-                        <?php $userphoto = $row['userImage'];
-                        if ($userphoto == "") :
-                        ?>
-                            <img src="userimages/noimage.png" class="img-circle" width="70" height="70">
-                        <?php else : ?>
-                            <img src="userimages/<?php echo htmlentities($userphoto); ?>" class="img-circle" width="70" height="70">
 
-                        <?php endif; ?>
-                    </a>
-                </p>
 
                 <h5 class="centered"><?php echo htmlentities($row['fullName']); ?></h5>
             <?php } ?>
@@ -36,7 +26,7 @@
                 </a>
                 <ul class="sub">
                     <li><a href="profile.php">Profile</a></li>
-                    <li><a href="change-password.php">Change Password</a></li>
+
 
                 </ul>
             </li>

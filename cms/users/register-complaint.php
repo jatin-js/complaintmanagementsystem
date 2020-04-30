@@ -9,17 +9,15 @@ if (strlen($_SESSION['login']) == 0) {
   if (isset($_POST['submit'])) {
     $uid = $_SESSION['id'];
     $category = $_POST['category'];
-    $subcat = $_POST['subcategory'];
+
     $complaintype = $_POST['complaintype'];
-    $state = $_POST['state'];
+    $year = $_POST['year'];
     $noc = $_POST['noc'];
     $complaintdetials = $_POST['complaindetails'];
-    $compfile = $_FILES["compfile"]["name"];
 
 
 
-    move_uploaded_file($_FILES["compfile"]["tmp_name"], "complaintdocs/" . $_FILES["compfile"]["name"]);
-    $query = mysqli_query($con, "insert into tblcomplaints(userId,category,subcategory,complaintType,state,noc,complaintDetails,complaintFile) values('$uid','$category','$subcat','$complaintype','$state','$noc','$complaintdetials','$compfile')");
+    $query = mysqli_query($con, "insert into tblcomplaints(userId,category,subcategory,complaintType,year,noc,complaintDetails,complaintFile) values('$uid','$category','$subcat','$complaintype','$year','$noc','$complaintdetials','$compfile')");
     // code for show complaint number
     $sql = mysqli_query($con, "select complaintNumber from tblcomplaints  order by complaintNumber desc limit 1");
     while ($row = mysqli_fetch_array($sql)) {
@@ -111,12 +109,7 @@ if (strlen($_SESSION['login']) == 0) {
                         ?>
                       </select>
                     </div>
-                    <label class="col-sm-2 col-sm-2 control-label">Sub Category </label>
-                    <div class="col-sm-4">
-                      <select name="subcategory" id="subcategory" class="form-control">
-                        <option value="">Select Subcategory</option>
-                      </select>
-                    </div>
+
                   </div>
 
 
@@ -131,14 +124,14 @@ if (strlen($_SESSION['login']) == 0) {
                       </select>
                     </div>
 
-                    <label class="col-sm-2 col-sm-2 control-label">State</label>
+                    <label class="col-sm-2 col-sm-2 control-label">year</label>
                     <div class="col-sm-4">
-                      <select name="state" required="required" class="form-control">
-                        <option value="">Select State</option>
-                        <?php $sql = mysqli_query($con, "select stateName from state ");
+                      <select name="year" required="required" class="form-control">
+                        <option value="">Select Year</option>
+                        <?php $sql = mysqli_query($con, "select yearName from year ");
                         while ($rw = mysqli_fetch_array($sql)) {
                         ?>
-                          <option value="<?php echo htmlentities($rw['stateName']); ?>"><?php echo htmlentities($rw['stateName']); ?></option>
+                          <option value="<?php echo htmlentities($rw['yearName']); ?>"><?php echo htmlentities($rw['yearName']); ?></option>
                         <?php
                         }
                         ?>
@@ -160,12 +153,6 @@ if (strlen($_SESSION['login']) == 0) {
                     <label class="col-sm-2 col-sm-2 control-label">Complaint Details (max 2000 words) </label>
                     <div class="col-sm-6">
                       <textarea name="complaindetails" required="required" cols="10" rows="10" class="form-control" maxlength="2000"></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">Complaint Related Doc(if any) </label>
-                    <div class="col-sm-6">
-                      <input type="file" name="compfile" class="form-control" value="">
                     </div>
                   </div>
 
